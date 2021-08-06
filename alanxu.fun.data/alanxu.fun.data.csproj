@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\alanxu.fun.entity\alanxu.fun.entity.csproj" />
+    <ProjectReference Include="..\alanxu.fun.idata\alanxu.fun.idata.csproj" />
+    <ProjectReference Include="..\alanxu.fun.util\alanxu.fun.util.csproj" />
+  </ItemGroup>
+
+</Project>

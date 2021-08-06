@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\alanxu.fun.di\alanxu.fun.di.csproj" />
+    <ProjectReference Include="..\alanxu.fun.entity\alanxu.fun.entity.csproj" />
+    <ProjectReference Include="..\alanxu.fun.iserver\alanxu.fun.iserver.csproj" />
+    <ProjectReference Include="..\alanxu.fun.util\alanxu.fun.util.csproj" />
+  </ItemGroup>
+
+</Project>
