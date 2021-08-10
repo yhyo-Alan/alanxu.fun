@@ -25,12 +25,12 @@ namespace alanxu.fun.data
         /// <returns></returns>
         public async Task<List<Article>> ArticleListAsync()
         {
-            return await _db.Article.AsNoTracking().Where(a => a.State != -1).Select(a => new Article
+            return await _db.Article.AsNoTracking().OrderBy(a => a.CreateTime).Where(a => a.State != -1).Select(a => new Article
             {
                 Id = a.Id,
                 Title = a.Title,
                 ModifyTime = a.ModifyTime
-            }).OrderBy(a => a.CreateTime).ToListAsync();
+            }).ToListAsync();
         }
 
         /// <summary>

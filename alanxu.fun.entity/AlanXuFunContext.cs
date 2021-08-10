@@ -31,11 +31,39 @@ namespace alanxu.fun.entity
         #region 方法重写
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Article>().HasData(new Article()
+            modelBuilder.Entity<Article>().HasData(new Article[]
             {
-                Id = 1,
-                Title = "文章标题-测试",
-                Comment = "文章内容-测试"
+                new Article{
+                    Id = 1,
+                    Title = "文章标题-测试",
+                    Comment = "文章内容-测试"
+                },
+                new Article{
+                    Id = 2,
+                    Title = "testTitle",
+                    Comment = "testComment"
+                }
+            });
+
+            modelBuilder.Entity<Comment>().HasData(new Comment[] {
+                new Comment{
+                    Id=1,
+                    PatientId=0,
+                    Comments="赞赞赞",
+                    ArticleId=1
+                },
+                new Comment{
+                    Id=2,
+                    PatientId=0,
+                    Comments="好好好",
+                    ArticleId=1
+                },
+                new Comment{
+                    Id=3,
+                    PatientId=1,
+                    Comments="你也赞",
+                    ArticleId=1
+                }
             });
         }
         #endregion

@@ -30,5 +30,7 @@ namespace alanxu.fun.entity.DbEntity
         /// </summary>
         [MaxLength(300, ErrorMessage = "评论不能多余300个字符")]
         public string Comments { get; set; }
+
+        public int ArticleId { get; set; }
     }
 }
