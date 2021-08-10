@@ -10,9 +10,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace alanxu.fun.api
@@ -42,7 +45,26 @@ namespace alanxu.fun.api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "alanxu.fun.api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "alanxu.fun.api",
+                    Version = "v1",
+                    Contact = new OpenApiContact()
+                    {
+                        Name = "Alan Xu",
+                        Url = new Uri("http://alanxu.fun")
+                    }
+                });
+                //反射获取xml文件，并构造文件路径
+                string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                string xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                //启用xml注释，第二个参数表示启用控制器注释
+                //如果报找不到xml路径，可以在项目文件添加如下代码：
+                //<PropertyGroup Condition = "'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" >
+                //<GenerateDocumentationFile > true </ GenerateDocumentationFile >
+                //<NoWarn>$(NoWarn); 1591 </ NoWarn >
+                //</PropertyGroup >
+                c.IncludeXmlComments(xmlPath, true);
             });
         }
 
@@ -53,7 +75,12 @@ namespace alanxu.fun.api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "alanxu.fun.api v1"));
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "alanxu.fun.api v1");
+                    c.DocExpansion(DocExpansion.None);//折叠
+                    c.DefaultModelsExpandDepth(-1);//不显示swagger界面的Schemas节点
+                });
             }
 
             app.UseHttpsRedirection();
