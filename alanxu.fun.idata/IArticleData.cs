@@ -15,5 +15,12 @@ namespace alanxu.fun.idata
         /// </summary>
         /// <returns></returns>
         Task<List<Article>> ArticleListAsync();
+
+        /// <summary>
+        /// 通过文章id获取文章内容
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<List<Article>> ArticleContentAsync(int id);
     }
 }

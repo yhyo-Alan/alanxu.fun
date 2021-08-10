@@ -17,9 +17,25 @@ namespace alanxu.fun.server
         {
             _db = db;
         }
+
+
+        /// <summary>
+        /// 查询文章列表
+        /// </summary>
+        /// <returns></returns>
         public async Task<ResResultDto> ArticleListAsync()
         {
             return ResResultDto.ToSuccess(await _db.ArticleListAsync());
+        }
+
+        /// <summary>
+        /// 通过文章id获取文章内容
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ResResultDto> ArticleContentAsync(int id)
+        {
+            return ResResultDto.ToSuccess(await _db.ArticleContentAsync(id));
         }
     }
 }

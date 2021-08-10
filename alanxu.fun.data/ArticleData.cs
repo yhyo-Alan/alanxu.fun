@@ -18,9 +18,29 @@ namespace alanxu.fun.data
         {
             _db = db;
         }
+
+        /// <summary>
+        /// 查询文章列表
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Article>> ArticleListAsync()
         {
-            return await _db.Article.AsNoTracking().Where(a => a.State != -1).ToListAsync();
+            return await _db.Article.AsNoTracking().Where(a => a.State != -1).Select(a => new Article
+            {
+                Id = a.Id,
+                Title = a.Title,
+                ModifyTime = a.ModifyTime
+            }).OrderBy(a => a.CreateTime).ToListAsync();
+        }
+
+        /// <summary>
+        /// 通过文章id获取文章内容
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<List<Article>> ArticleContentAsync(int id)
+        {
+            return await _db.Article.AsNoTracking().Include(a => a.Comments).Where(a => a.Id.Equals(id)).ToListAsync();
         }
     }
 }
