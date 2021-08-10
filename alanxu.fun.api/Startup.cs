@@ -1,7 +1,10 @@
+using alanxu.fun.di;
+using alanxu.fun.entity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +31,15 @@ namespace alanxu.fun.api
         {
 
             services.AddControllers();
+
+            #region mysql
+            string conStr = Configuration.GetConnectionString("MySql");
+            ServerVersion sv = ServerVersion.AutoDetect(conStr);
+            services.AddDbContext<AlanXuFunContext>(options => options.UseMySql(conStr, sv));
+            #endregion
+
+            services.AddDI();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "alanxu.fun.api", Version = "v1" });
