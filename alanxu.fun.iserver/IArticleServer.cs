@@ -14,7 +14,5 @@ namespace alanxu.fun.iserver
         /// </summary>
         /// <returns></returns>
         Task<ResResultDto> ArticleListAsync();
-
-        Task<ResResultDto> ArticleContentAsync(int id);
     }
 }

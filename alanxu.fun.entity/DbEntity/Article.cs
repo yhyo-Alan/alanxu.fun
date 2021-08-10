@@ -30,14 +30,17 @@ namespace alanxu.fun.entity.DbEntity
         /// <summary>
         /// 创建日期
         /// </summary>
-        [DataType(DataType.Date)]
         public DateTime CreateTime { get; set; } = DateTime.Now;
 
         /// <summary>
         /// 修改日期
         /// </summary>
-        [DataType(DataType.Date)]
-        public DateTime ModifyTime { get; set; } = DateTime.Now;
+        public DateTime? ModifyTime { get; set; }
+
+        /// <summary>
+        /// 发布日期
+        /// </summary>
+        public DateTime? PublishTime { get; set; }
 
         /// <summary>
         /// 分享次数
