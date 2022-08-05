@@ -23,10 +23,7 @@ namespace alanxu.fun.server
         /// 查询文章列表
         /// </summary>
         /// <returns></returns>
-        public async Task<ResResultDto> ArticleListAsync()
-        {
-            return ResResultDto.ToSuccess(await _db.ArticleListAsync());
-        }
+        public async Task<ResResultDto> ArticleListAsync() => ResResultDto.ToSuccess(await _db.ArticleListAsync());
 
         /// <summary>
         /// 通过文章id获取文章内容
